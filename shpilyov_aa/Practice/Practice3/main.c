@@ -1,44 +1,72 @@
-#include<stdio.h>
+п»ї#include<stdio.h>
 #include<locale.h>
 #include<stdlib.h>
 #include<time.h>
 
 void main()
 {
-	int n, chislo, a, i;
+	int n, chislo, a = 0, i = 1, x = 1, y = 1000;
 	char z = '=';
 	srand(time(NULL));
 	setlocale(LC_ALL, "Rus");
-	printf("Выберите режим 1 или 2: ");
+	printf("Р’С‹Р±РµСЂРёС‚Рµ СЂРµР¶РёРј 1 РёР»Рё 2: ");
 	scanf("%d", &n);
-    if(n == 1)
+	if (n == 1)
 	{
-		chislo = 1 + rand() % 1000;
-		printf("Компьютер загадал число от 1 до 1000, попробуйте отгадать: ");
-		i = 0;
-		a = 0;
-		while(1)
+		chislo = x + rand() % y;
+		printf("РљРѕРјРїСЊСЋС‚РµСЂ Р·Р°РіР°РґР°Р» С‡РёСЃР»Рѕ РѕС‚ 1 РґРѕ 1000, РїРѕРїСЂРѕР±СѓР№С‚Рµ РѕС‚РіР°РґР°С‚СЊ: ");
+		while (1)
 		{
 			scanf("%d", &a);
-			if(a > chislo)
-				printf("Загаданное число меньше\n");
+			if (a > chislo)
+			{
+				printf("Р—Р°РіР°РґР°РЅРЅРѕРµ С‡РёСЃР»Рѕ РјРµРЅСЊС€Рµ\n");
+				i++;
+			}
 			else if (a < chislo)
-				printf("Загаданное число больше\n");
+			{
+				printf("Р—Р°РіР°РґР°РЅРЅРѕРµ С‡РёСЃР»Рѕ Р±РѕР»СЊС€Рµ\n");
+				i++;
+			}
 			else
 			{
-				printf("Вы угадали! Кол-во попыток: %d", i);
+				printf("Р’С‹ СѓРіР°РґР°Р»Рё! РљРѕР»-РІРѕ РїРѕРїС‹С‚РѕРє: %d", i);
 				break;
 			}
-			i++;
-		} 
+			
+		}
 	}
 	else if (n == 2)
 	{
-		
+		chislo = rand() * (y - x) / RAND_MAX + x;
+		printf("РљРѕРјРїСЊСЋС‚РµСЂ РїСЂРѕР±СѓРµС‚ СѓРіР°РґР°С‚СЊ: %d\n", chislo);
+		while (1)
+		{
+			scanf("%c", &z);
+			if (z == '<')
+			{
+				y = chislo;
+				chislo = rand() * (y - x) / RAND_MAX + x;
+				printf("%d \n", chislo);
+				i++;
+			}
+			else if (z == '>')
+			{
+				x = chislo;
+				chislo = rand() * (y - x) / RAND_MAX + x;
+				printf("%d \n", chislo);
+				i++;
+			}
+			else if (z == '=')
+			{
+				printf("РљРѕРјРїСЊСЋС‚РµСЂ СѓРіР°РґР°Р». РљРѕР»-РІРѕ РїРѕРїС‹С‚РѕРє: %d\n", i);
+				break;
+			}
+		}
 	}
-	else 
+	else
 	{
-		printf("Неверный режим!");
+		printf("РќРµРІРµСЂРЅС‹Р№ СЂРµР¶РёРј!");
 		return;
 	}
 }
